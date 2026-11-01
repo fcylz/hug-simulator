@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🫂ハグシミュレーター</title>
+    <title>🫂拥抱模拟器</title>
     <style>
         :root { --panel-width: 300px; }
-        body { margin: 0; font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; background: #ffffff; overflow: hidden; }
+        body { margin: 0; font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif; background: #ffffff; overflow: hidden; }
         #ui-panel {
             position: absolute; 
             top: 10px; 
             left: 10px; 
             width: var(--panel-width);
             max-height: calc(100vh - 20px);
-            max-height: calc(100dvh - 20px); /* アドレスバーの可変長に対応 */
+            max-height: calc(100dvh - 20px); /* 适配可变长度的地址栏 */
             background: rgba(255, 255, 255, 0.95); 
             padding: 15px; 
-            padding-bottom: 40px; /* 一番下の要素が隠れないよう余白を確保 */
+            padding-bottom: 40px; /* 预留留白，避免最下方元素被遮挡 */
             border-radius: 15px; 
             z-index: 100; 
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             overflow-y: auto; 
-            -webkit-overflow-scrolling: touch; /* iOSでの滑らかなスクロール */
-            touch-action: pan-y; /* 縦スワイプ操作（スクロール）を許可 */
+            -webkit-overflow-scrolling: touch; /* iOS 上的顺滑滚动 */
+            touch-action: pan-y; /* 允许纵向滑动操作（滚动） */
             border: 1px solid rgba(255,255,255,0.3); 
             backdrop-filter: blur(10px); 
             -webkit-backdrop-filter: blur(10px);
             box-sizing: border-box;
-            transition: all 0.2s ease-out; /* 開閉アニメーションを滑らかに */
+            transition: all 0.2s ease-out; /* 让开合动画更顺滑 */
         }
         #canvas-container { width: 100vw; height: 100vh; cursor: move; touch-action: none; }
 
@@ -43,7 +43,7 @@
             .input-group { padding: 8px; margin-bottom: 5px; }
         }
 
-        /* 折りたたんだ（閉じた）時の専用スタイル */
+        /* 折叠（收起）状态的专用样式 */
         #ui-panel.collapsed {
             max-height: none !important;
             padding: 10px 15px !important;
@@ -53,7 +53,7 @@
         }
 
         @media screen and (max-width: 480px) { 
-            /* スマホ表示で閉じた場合、右端の固定を解除してタイトルサイズへ収める */
+            /* 手机端收起时解除右端固定，收进标题尺寸 */
             #ui-panel.collapsed { right: auto; }
         }
 
@@ -81,7 +81,7 @@
             background: #eee; 
             padding: 4px 10px; 
             border-radius: 10px; 
-            white-space: nowrap; /* テキストの意図しない改行を防止 */
+            white-space: nowrap; /* 防止文本意外换行 */
         }
         .collapsed #ui-content { display: none; }
 
@@ -90,7 +90,7 @@
             margin: 0; 
             color: #333; 
             font-weight: bold; 
-            white-space: nowrap; /* タイトルの改行を防止 */
+            white-space: nowrap; /* 防止标题换行 */
         }
         .app-description { font-size: 11px; color: #777; margin-top: 8px; margin-bottom: 5px; line-height: 1.5; text-align: center; }
         
@@ -190,64 +190,64 @@
 
 <div id="ui-panel">
     <div class="panel-header" onclick="togglePanel()">
-        <h1 class="app-title">🫂ハグシミュレーター</h1>
-        <span id="toggle-text">閉じる</span>
+        <h1 class="app-title">🫂拥抱模拟器</h1>
+        <span id="toggle-text">收起</span>
     </div>
 
     <div id="ui-content">
-        <p class="app-description">性別と身長からハグの雰囲気をシミュレーションします。</p>
+        <p class="app-description">可根据性别与身高模拟拥抱的氛围。</p>
         
         <div class="input-group group-a">
             <div class="section-header"><strong>A</strong></div>
             <div class="input-row">
-                <div class="input-item"><span class="hint">名前</span><input type="text" id="nameA" placeholder="名前A" oninput="updateScene()"></div>
-                <div class="input-item" style="flex: 0.6;"><span class="hint">性別</span><select id="genderA" onchange="updateScene()"><option value="male">男</option><option value="female" selected>女</option></select></div>
+                <div class="input-item"><span class="hint">名字</span><input type="text" id="nameA" placeholder="名字A" oninput="updateScene()"></div>
+                <div class="input-item" style="flex: 0.6;"><span class="hint">性别</span><select id="genderA" onchange="updateScene()"><option value="male">男</option><option value="female" selected>女</option></select></div>
             </div>
             <div class="input-row">
-                <div class="input-item"><span class="hint">身長 (cm)</span><input type="number" id="heightA" value="158.0" step="0.1" oninput="updateScene()"></div>
-                <div class="input-item" style="flex: 0.35;"><span class="hint">色</span><input type="color" id="colorA" class="color-picker" value="#ffcc99" oninput="updateScene()"></div>
+                <div class="input-item"><span class="hint">身高 (cm)</span><input type="number" id="heightA" value="158.0" step="0.1" oninput="updateScene()"></div>
+                <div class="input-item" style="flex: 0.35;"><span class="hint">颜色</span><input type="color" id="colorA" class="color-picker" value="#ffcc99" oninput="updateScene()"></div>
             </div>
         </div>
 
         <div class="input-group group-b">
             <div class="section-header"><strong>B</strong></div>
             <div class="input-row">
-                <div class="input-item"><span class="hint">名前</span><input type="text" id="nameB" placeholder="名前B" oninput="updateScene()"></div>
-                <div class="input-item" style="flex: 0.6;"><span class="hint">性別</span><select id="genderB" onchange="updateScene()"><option value="male" selected>男</option><option value="female">女</option></select></div>
+                <div class="input-item"><span class="hint">名字</span><input type="text" id="nameB" placeholder="名字B" oninput="updateScene()"></div>
+                <div class="input-item" style="flex: 0.6;"><span class="hint">性别</span><select id="genderB" onchange="updateScene()"><option value="male" selected>男</option><option value="female">女</option></select></div>
             </div>
             <div class="input-row">
-                <div class="input-item"><span class="hint">身長 (cm)</span><input type="number" id="heightB" value="171.5" step="0.1" oninput="updateScene()"></div>
-                <div class="input-item" style="flex: 0.35;"><span class="hint">色</span><input type="color" id="colorB" class="color-picker" value="#ffad60" oninput="updateScene()"></div>
+                <div class="input-item"><span class="hint">身高 (cm)</span><input type="number" id="heightB" value="171.5" step="0.1" oninput="updateScene()"></div>
+                <div class="input-item" style="flex: 0.35;"><span class="hint">颜色</span><input type="color" id="colorB" class="color-picker" value="#ffad60" oninput="updateScene()"></div>
             </div>
         </div>
 
         <div style="padding: 0 5px;">
             <div class="anim-controls">
-                <button id="btn-front" class="btn-anim active" onclick="setHugMode('front')">正面ハグ</button>
-                <button id="btn-back" class="btn-anim" onclick="setHugMode('back')">バックハグ</button>
+                <button id="btn-front" class="btn-anim active" onclick="setHugMode('front')">正面拥抱</button>
+                <button id="btn-back" class="btn-anim" onclick="setHugMode('back')">背后拥抱</button>
             </div>
-            <button class="switch-btn swap-btn" onclick="swapAB()">⇄ AとBを入れ替える</button>
-            <button class="switch-btn" onclick="switchView()">🔄 視点を切り替える</button>
+            <button class="switch-btn swap-btn" onclick="swapAB()">⇄ 交换 A 与 B</button>
+            <button class="switch-btn" onclick="switchView()">🔄 切换视角</button>
         </div>
         
         <div id="info-container">
             <div class="info-box" id="info"></div>
             <button class="share-btn" onclick="shareToX()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>で結果をシェアする
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg> 分享结果
             </button>
             <div class="other-tools-link">
-                <p style="font-size: 10px; color: #888; margin-bottom: 8px;">こちらもチェック❣🤩</p>
-                <a href="https://qwertyaz111.github.io/my-site-hub/">ツール・シミュレーター一覧</a>
+                <p style="font-size: 10px; color: #888; margin-bottom: 8px;">顺便也看看这些❣🤩</p>
+                <a href="https://qwertyaz111.github.io/my-site-hub/">工具・模拟器合集</a>
             </div>
             <div class="usage-notes">
-                スクショ投稿や加工、トレース等はご自由にお楽しみください。<br>
-                ※営利目的や商用利用はご遠慮ください。
+                截图分享、二次加工、临摹描图等都可以随意使用。<br>
+                ※请勿用于营利、商业用途。
             </div>
         </div>
     </div>
 </div>
 
-<div id="view-label">三人称視点</div>
+<div id="view-label">第三人称视角</div>
 <div class="crosshair" id="crosshair" style="display:none;"></div>
 <div id="canvas-container"></div>
 
@@ -298,7 +298,7 @@ function init() {
     window.swapAB = swapAB;
     window.shareToX = shareToX;
 
-    // 入力フォームからフォーカスが外れた際に画面・パネルのスクロールを復元
+    // 输入框失焦后恢复画面与面板的滚动位置
     document.querySelectorAll('#ui-panel input, #ui-panel select').forEach(element => {
         element.addEventListener('blur', () => {
             const panel = document.getElementById('ui-panel');
@@ -320,7 +320,7 @@ function init() {
         const panel = document.getElementById('ui-panel');
         const text = document.getElementById('toggle-text');
         panel.classList.toggle('collapsed');
-        text.innerText = panel.classList.contains('collapsed') ? '開く' : '閉じる';
+        text.innerText = panel.classList.contains('collapsed') ? '展开' : '收起';
     };
 
     updateScene();
@@ -387,7 +387,7 @@ function createMannequin(color, heightCm, gender, name, role, otherConfig) {
 
     group.arms = [];
     const armThickness = torsoW * 0.3;
-    const shoulderW = (torsoW * 0.5) + (armThickness * 0.5); // 腕の厚みを考慮して外側に配置
+    const shoulderW = (torsoW * 0.5) + (armThickness * 0.5); // 考虑手臂厚度，放置在外侧
     const shoulderY = legH + torsoH - (torsoW * 0.15); 
     const armLen = h * 0.38;
 
@@ -447,7 +447,7 @@ function updateScene() {
         personA.position.z = -dist / 2; personA.rotation.y = 0;
         personB.position.z = dist / 2; personB.rotation.y = Math.PI;
 
-        // Aの腕
+        // A 的手臂
         const dxA = (personB.userData.width / 2 + personA.userData.armThick * 0.5) - personA.userData.shoulderW;
         const angleZA = Math.atan2(dxA, dist);
         const dyA = personA.userData.shoulderY - (personB.userData.legH + personB.userData.torsoH * 0.6);
@@ -457,7 +457,7 @@ function updateScene() {
             arm.rotation.x = - (Math.PI / 2) + angleXA;
         });
 
-        // Bの腕
+        // B 的手臂
         const dxB = (personA.userData.width / 2 + personB.userData.armThick * 0.5) - personB.userData.shoulderW;
         const angleZB = Math.atan2(dxB, dist);
         const dyB = personB.userData.shoulderY - (personA.userData.legH + personA.userData.torsoH * 0.6);
@@ -468,18 +468,18 @@ function updateScene() {
         });
 
     } else {
-        // バックハグ
+        // 背后拥抱
         const dist = 0.28;
         personA.position.z = 0.1; personA.rotation.y = 0;
         personB.position.z = -dist + 0.1; personB.rotation.y = 0; 
         
-        // Aの腕（真下へまっすぐ）
+        // A 的手臂（笔直向下）
         personA.arms.forEach((arm, i) => { 
             arm.rotation.x = 0;
             arm.rotation.z = 0; 
         });
 
-        // Bの腕（Aの胴体にピタッと触れる計算）
+        // B 的手臂（紧贴 A 躯干的计算）
         const targetSideX = personA.userData.width / 2 + personB.userData.armThick * 0.5;
         const dxB = targetSideX - personB.userData.shoulderW;
         
@@ -500,14 +500,14 @@ function updateScene() {
 
     if(currentView !== '3rd') {
         const myName = (currentView === 'A') ? nA : nB;
-        document.getElementById('view-label').innerText = `${myName} の視点`;
+        document.getElementById('view-label').innerText = `${myName} 的视角`;
         if(currentView === 'A') { personA.headParts.visible = false; personA.nameTag.visible = false; }
         if(currentView === 'B') { personB.headParts.visible = false; personB.nameTag.visible = false; }
     }
 
     document.getElementById('info').innerHTML = `
         <div class="info-row">
-            <span class="info-label">📏 身長差</span>
+            <span class="info-label">📏 身高差</span>
             <span class="info-value">${Math.abs(hA-hB).toFixed(1)}<span class="unit">cm</span></span>
         </div>
     `;
@@ -618,10 +618,10 @@ function switchView() {
     const nB = document.getElementById('nameB').value||'B';
     
     if (currentView === '3rd') {
-        document.getElementById('view-label').innerText = '三人称視点';
+        document.getElementById('view-label').innerText = '第三人称视角';
     } else {
         const myName = (currentView === 'A') ? nA : nB;
-        document.getElementById('view-label').innerText = `${myName} の視点`;
+        document.getElementById('view-label').innerText = `${myName} 的视角`;
     }
 
     document.getElementById('crosshair').style.display = currentView === '3rd' ? 'none' : 'block';
@@ -637,11 +637,78 @@ function shareToX() {
     const nB = document.getElementById('nameB').value || 'B';
     const hA = parseFloat(document.getElementById('heightA').value) || 158.0;
     const hB = parseFloat(document.getElementById('heightB').value) || 171.5;
-    const text = `${nA}(${hA.toFixed(1)}cm)と${nB}(${hB.toFixed(1)}cm)がハグ！\n#ハグシミュレーター\n`;
+    const text = `${nA}（${hA.toFixed(1)}cm）和 ${nB}（${hB.toFixed(1)}cm）抱在了一起！\n#拥抱模拟器\n`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
 }
 
 init();
+</script>
+
+<script>
+/* 设置持久化：名字・身高・颜色等会记住，刷新后自动恢复 */
+(function () {
+  var KEY = 'simSettings:' + location.pathname;
+  var SKIP = { seek: 1, pVol: 1 };
+  function list() {
+    var els = document.querySelectorAll('input,select,textarea'), out = [], i, el;
+    for (i = 0; i < els.length; i++) {
+      el = els[i];
+      if (el.type === 'file' || el.type === 'button' || el.type === 'submit' || el.type === 'reset') continue;
+      if (el.id && SKIP[el.id]) continue;
+      out.push(el);
+    }
+    return out;
+  }
+  function keyOf(el) {
+    if (el.id) return 'id:' + el.id;
+    var cn = (el.className || '').split(/\s+/)[0];
+    if (!cn) return null;
+    var sibs = document.querySelectorAll(el.tagName.toLowerCase() + '[class~="' + cn + '"]'), i;
+    for (i = 0; i < sibs.length; i++) if (sibs[i] === el) return 'cls:' + cn + ':' + i;
+    return null;
+  }
+  function get(el) {
+    return (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value;
+  }
+  function set(el, v) {
+    var i;
+    if (el.tagName === 'SELECT') {
+      var ok = false;
+      for (i = 0; i < el.options.length; i++) if (el.options[i].value === v) ok = true;
+      if (!ok) return;
+    }
+    if (el.type === 'checkbox' || el.type === 'radio') el.checked = !!v;
+    else el.value = v;
+  }
+  function fire(el, type) {
+    try { el.dispatchEvent(new Event(type, { bubbles: true })); } catch (e) {}
+  }
+  function restore() {
+    var raw = null, data = null, els, k, i;
+    try { raw = localStorage.getItem(KEY); } catch (e) { return; }
+    if (!raw) return;
+    try { data = JSON.parse(raw); } catch (e) { return; }
+    els = list();
+    for (i = 0; i < els.length; i++) { k = keyOf(els[i]); if (k && data[k] !== undefined) set(els[i], data[k]); }
+    for (i = 0; i < els.length; i++) { fire(els[i], 'input'); fire(els[i], 'change'); }
+    for (i = 0; i < els.length; i++) { k = keyOf(els[i]); if (k && data[k] !== undefined) set(els[i], data[k]); }
+  }
+  var timer = null;
+  function save() {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(function () {
+      var els = list(), data = {}, k, i;
+      for (i = 0; i < els.length; i++) { k = keyOf(els[i]); if (k) data[k] = get(els[i]); }
+      try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+    }, 200);
+  }
+  document.addEventListener('input', save, true);
+  document.addEventListener('change', save, true);
+  window.addEventListener('load', restore);
+  window.__simSettings = {
+    clear: function () { try { localStorage.removeItem(KEY); } catch (e) {} }
+  };
+})();
 </script>
 </body>
 </html>
